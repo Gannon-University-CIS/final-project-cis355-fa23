@@ -5,7 +5,7 @@
 - [x] Planning Chathistory DB
 - [x] Setup Chatroom DB
 - [x] Setup ChatHistory DB
-- [x] Setup 
+- [x] Setup Room Creator
 
 ### Setup of Databases
 For the chatroom setup I had used the **Ef Migration** to autosetup the Databases based on the written functions on the _UserDbContext.cs_ file located in `Backend/src/UserApi/Entities/` File.
