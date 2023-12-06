@@ -180,7 +180,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"id\": \"id\",\n  \"password\": \"password\",\n  \"message\": \"hello world\"\n}",
+									"raw": "{\n  \"roomId\": \"30f531d1-43f7-4feb-b7d3-dd88a3eac965\",\n  \"password\": \"password\",\n  \"message\": \"hello world\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
