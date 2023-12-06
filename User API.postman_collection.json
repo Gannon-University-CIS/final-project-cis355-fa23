@@ -211,7 +211,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"id\": \"id\",\r\n  \"password\": \"password\"\r\n}"
+									"raw": "{\r\n  \"roomId\": \"id\",\r\n  \"password\": \"password\"\r\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/chatroom/chat",
