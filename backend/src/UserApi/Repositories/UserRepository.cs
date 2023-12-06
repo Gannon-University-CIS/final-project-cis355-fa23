@@ -20,6 +20,12 @@ public class UserRepository : IUserRepository
         return await _context.Users.ToListAsync();
     }
 
+
+    public async Task<IEnumerable<Chatroom>> GetAllRoomsAsync()
+    {
+        return await _context.Chatrooms.ToListAsync();
+    }
+
     public async Task<User?> GetUserByIdAsync(string id)
     {
         // convert string to Guid

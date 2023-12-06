@@ -16,3 +16,6 @@ For the setup fo a room I was required to make a controller to keep track not ju
 In order to make the new room a _password must be set of minimum 8 characters_ and a _title_. The **Id** is set automatically onces the required fields where filled correctly then it go to create the database and it maps all the information from the database in the required fields.
 
 When the post has been activated then a request, if all is good to go then it brings back a response.
+
+### Setup of Room List
+By using the **Get** http request we are able to obtain all of the chatrooms created. In comparison with the **Get** from _users_ this one doe snot have any `Role` requierments to view the list of all available chatrooms.

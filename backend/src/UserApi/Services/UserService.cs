@@ -89,6 +89,13 @@ public class UserService : IUserService
         return _mapper.Map<IEnumerable<UserResponse>>(users);
     }
 
+    public async Task<IEnumerable<RoomResponse>> GetAllChatroomsAsync()
+    {
+        var rooms = await _userRepository.GetAllRoomsAsync();
+
+        return _mapper.Map<IEnumerable<RoomResponse>>(rooms);
+    }
+
     public async Task<UserResponse?> GetByIdAsync(string id)
     {
         var user = await _userRepository.GetUserByIdAsync(id);

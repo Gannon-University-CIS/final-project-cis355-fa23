@@ -23,4 +23,12 @@ public class ChatroomController : ControllerBase
 
         return Ok(createdRoom);
     }
+
+    [HttpGet("room")]
+    public async Task<IActionResult> GetAllRooms()
+    {
+        var rooms = await _userService.GetAllChatroomsAsync();
+
+        return Ok(rooms);
+    }
 }

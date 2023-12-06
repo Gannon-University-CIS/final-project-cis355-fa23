@@ -166,6 +166,69 @@
 			"name": "chatroom",
 			"item": [
 				{
+					"name": "chat",
+					"item": [
+						{
+							"name": "chat",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"id\",\n  \"password\": \"password\",\n  \"message\": \"hello world\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/chatroom/chat",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"chatroom",
+										"chat"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "chat",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"id\",\r\n  \"password\": \"password\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/chatroom/chat",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"chatroom",
+										"chat"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "room",
 					"request": {
 						"method": "POST",
@@ -177,7 +240,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"password\",\n  \"password\": \"password\"\n}",
+							"raw": "{\n    \"title\": \"title\",\n    \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -185,6 +248,24 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "{{baseUrl}}/chatroom/room",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"chatroom",
+								"room"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "room",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{baseUrl}}/chatroom/room",
 							"host": [

@@ -42,6 +42,7 @@ public class MappingProfile : Profile
         // Chatrooms Mapping
         CreateMap<CreateRoomRequest, Chatroom>();
         CreateMap<Chatroom, CreateRoomResponse>();
+        CreateMap<Chatroom, RoomResponse>();
         // Add more mappings as needed
     }
 }
