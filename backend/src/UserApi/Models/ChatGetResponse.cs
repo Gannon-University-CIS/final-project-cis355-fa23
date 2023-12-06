@@ -7,5 +7,8 @@ using UserApi.Entities;
 /// </summary>
 public class ChatGetResponse
 {
+    /// <summary>
+    ///  The Id of the chatroom to prove it exists
+    /// </summary>
     public Guid Id { get; set; }
 }

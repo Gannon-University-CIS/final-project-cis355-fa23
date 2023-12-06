@@ -75,7 +75,9 @@ public partial class UserDbContext : DbContext
             entity.Property(e => e.DateCreated)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp without time zone");
-            entity.Property(e => e.Message).HasMaxLength(255);
+            entity.Property(e => e.Message).HasMaxLength(4096);
+            entity.Property(e => e.RoomId).HasMaxLength(36);
+            entity.Property(e => e.UserId).HasMaxLength(36);
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -10,4 +10,5 @@ public interface IUserRepository
     Task<User?> GetUserByIdAsync(string id);
     Task<User?> CreateUserAsync(User user);
     Task<Chatroom?> CreateRoomAsync(Chatroom room);
+    Task<ChatHistory?> CreateChatAsync(ChatHistory roomd);
 }

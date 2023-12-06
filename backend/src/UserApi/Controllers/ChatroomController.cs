@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using UserApi.Authorization;
 using UserApi.Models;
 using UserApi.Services;
+using UserApi.Entities;
 
 namespace UserApi.Controllers;
 
@@ -16,7 +18,6 @@ public class ChatroomController : ControllerBase
         _userService = userService;
     }
 
-    [AllowAnonymous]
     [HttpPost("room")]
     public async Task<IActionResult> CreateRoom(CreateRoomRequest newRoom)
     {
@@ -41,6 +42,15 @@ public class ChatroomController : ControllerBase
         if (response == null)
             return BadRequest(new { message = "Room Id or password is incorrect" });
 
-        return Ok(response);
+        var user = (User?)HttpContext.Items["User"];
+
+        if (user == null)
+        {
+            return BadRequest(new { message = "User is not logged in" });
+        }
+
+        var createdMessage = await _userService.CreateMessageAsync(model, user.Id, response.Id);
+
+        return Ok(createdMessage);
     }
 }

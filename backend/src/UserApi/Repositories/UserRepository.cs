@@ -90,6 +90,30 @@ public class UserRepository : IUserRepository
         }
     }
 
+    public async Task<ChatHistory?> CreateChatAsync(ChatHistory message)
+    {
+        try
+        {
+            // Add room to database
+            var createdMessage = (await _context.ChatHistory.AddAsync(message)).Entity;
+            // Save changes to database
+            await _context.SaveChangesAsync();
+
+            if (createdMessage == null)
+            {
+                _logger.LogError("An error occurred while creating the message. Message data: {Message}", message);
+                return null;
+            }
+
+            return createdMessage;
+        }
+        catch (DbUpdateException ex)
+        {
+            _logger.LogError(ex, "An error occurred while saving the entity changes.");
+            throw new RoomCreationFailedException("An unexpected error occurred while creating the message.", ex);
+        }
+    }
+
     public Task<User?> GetUserByUsernameAsync(string username)
     {
         return _context.Users.FirstOrDefaultAsync(u => u.Username == username);

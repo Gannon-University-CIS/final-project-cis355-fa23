@@ -18,4 +18,10 @@ public class ChatGetRequest
     /// </summary>
     [Required]
     public string Password { get; set; } = null!;
+
+    /// <summary>
+    /// The message to send to the chatroom.
+    /// </summary>
+    [Required]
+    public string Message { get; set; } = null!;
 }

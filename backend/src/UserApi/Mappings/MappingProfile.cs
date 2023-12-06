@@ -49,6 +49,8 @@ public class MappingProfile : Profile
                     {
                         Id = room.Id
                     });
+        CreateMap<ChatGetRequest, ChatHistory>();
+        CreateMap<ChatHistory, CreateChatResponse>();
         // Add more mappings as needed
     }
 }

@@ -100,6 +100,22 @@ public class UserService : IUserService
         return _mapper.Map<CreateRoomResponse>(createdRoom);
     }
 
+    public async Task<CreateChatResponse?> CreateMessageAsync(ChatGetRequest chatRequest, Guid userId, Guid roomId)
+    {
+        // Map ChatGetRequest model to ChatHistory entity with Automapper
+        var messageEntity = _mapper.Map<ChatHistory>(chatRequest);
+
+        messageEntity.UserId = userId.ToString();
+        messageEntity.RoomId = roomId.ToString();
+
+        // Create room in database
+        var createdRoom = await _userRepository.CreateChatAsync(messageEntity)
+            ?? throw new Exception("An error occurred when creating the room. Try again later.");
+
+        // Map Room entity to CreateRoomResponse model with Automapper
+        return _mapper.Map<CreateChatResponse>(createdRoom);
+    }
+
     public async Task<IEnumerable<UserResponse>> GetAllAsync()
     {
         var users = await _userRepository.GetAllUsersAsync();
