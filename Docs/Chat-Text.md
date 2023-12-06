@@ -8,6 +8,8 @@
 - [x] Setup Room Creator
 - [x] Get Room List
 - [x] Room Authentication
+- [x] Chat Send
+- [x] Get Chat by Id
 
 ### Setup of Databases
 For the chatroom setup I had used the **Ef Migration** to autosetup the Databases based on the written functions on the _UserDbContext.cs_ file located in `Backend/src/UserApi/Entities/` File.
@@ -25,3 +27,10 @@ By using the **Get** http request we are able to obtain all of the chatrooms cre
 ### Room Authentication
 In order to enter rooms which you've been invited there are many ways but because if time I chose to make the user type the **id** and the **password**.
 if room exist and the password was set right then it `throws back the id`. Later on the Id will be used to get chat messages and send chat messages to a specific chatroom
+
+### Chat Send
+To send the chat I made a authenticator which queries for `password` and `room id` in order to find the desired room and verify if you have permission. Once authenticated then there is a http request to obtain the users id. Once the message is sent the `id` of the room and the user are added into the chat message.
+### Get Chat By Id
+To set it up I set it up just how all the gets where set but with a little twist.
+In order to **filter** I added the content of all into a list which later I parse through in a for loop to compare the _id_ of the requested chat room and later it adds all of the ones containing the same id into a list to later be returned. This can be seen in `/backend/src/UserApi/Repositories/UserRepository.cs`.
+As well I set up the need for authentication with a password so the content can stay private.

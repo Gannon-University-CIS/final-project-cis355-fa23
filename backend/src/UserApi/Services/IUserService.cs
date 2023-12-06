@@ -7,8 +7,10 @@ public interface IUserService
 {
     Task<AuthenticateResponse?> Authenticate(AuthenticateRequest model);
     Task<ChatGetResponse?> AuthenticateRoom(ChatGetRequest model);
+    Task<ChatGetResponse?> AuthenticateChat(ChatFilterRequest model);
     Task<IEnumerable<UserResponse>> GetAllAsync();
     Task<IEnumerable<RoomResponse>> GetAllChatroomsAsync();
+    Task<IEnumerable<ChatResponse>> GetChatsAsync(string id);
     Task<UserResponse?> GetByIdAsync(string id);
     Task<CreateUserResponse?> CreateUserAsync(CreateUserRequest user);
     Task<CreateRoomResponse?> CreateRoomAsync(CreateRoomRequest room);

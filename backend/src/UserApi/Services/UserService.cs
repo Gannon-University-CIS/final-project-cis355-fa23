@@ -42,7 +42,25 @@ public class UserService : IUserService
         return _mapper.Map<AuthenticateResponse>(user, opts => opts.Items["Token"] = token);
     }
 
-        public async Task<ChatGetResponse?> AuthenticateRoom(ChatGetRequest model)
+    public async Task<ChatGetResponse?> AuthenticateRoom(ChatGetRequest model)
+    {
+        // get room from database
+        var room = await _userRepository.GetRoomByRoomIdAsync(model.RoomId);
+
+        // return null if room not found
+        if (room == null) return null;
+
+        // check if the provided password matches the password in the database and return null if it doesn't
+        if (!_passwordHasher.ValidatePassword(model.Password, room.PasswordHash, room.PasswordSalt)) return null;
+
+
+
+        // authentication successful so continue
+        // map room to response model with Automapper and return
+        return _mapper.Map<ChatGetResponse>(room);
+    }
+
+    public async Task<ChatGetResponse?> AuthenticateChat(ChatFilterRequest model)
     {
         // get room from database
         var room = await _userRepository.GetRoomByRoomIdAsync(model.RoomId);
@@ -128,6 +146,13 @@ public class UserService : IUserService
         var rooms = await _userRepository.GetAllRoomsAsync();
 
         return _mapper.Map<IEnumerable<RoomResponse>>(rooms);
+    }
+
+    public async Task<IEnumerable<ChatResponse>> GetChatsAsync(string id)
+    {
+        var chats = await _userRepository.GetChatsAsync(id);
+
+        return _mapper.Map<IEnumerable<ChatResponse>>(chats);
     }
 
     public async Task<UserResponse?> GetByIdAsync(string id)

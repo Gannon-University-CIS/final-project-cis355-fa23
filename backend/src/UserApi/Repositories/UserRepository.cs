@@ -37,6 +37,18 @@ public class UserRepository : IUserRepository
         return await _context.Users.FindAsync(guidId);
     }
 
+    public async Task<IEnumerable<ChatHistory>> GetChatsAsync(string id)
+    {
+        var list = await _context.ChatHistory.ToListAsync();
+        List<ChatHistory> filteredList = new List<ChatHistory>();
+        foreach (var item in list)
+        {
+            if (item.RoomId != null && item.RoomId.Equals(id.ToString()))
+                filteredList.Add(item);
+        }
+        return filteredList;
+    }
+
     public async Task<User?> CreateUserAsync(User user)
     {
         try
