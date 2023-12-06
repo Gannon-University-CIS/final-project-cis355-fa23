@@ -1,7 +1,7 @@
 # CIS 355 Lab 2 
 
 ## Documentation
-<a src="./Docs/Chat-Text.md">Click For Documentation</a>
+[CLICK FOR DOCUMENTATION](./Docs/Chat-Text.md)
 
 ## Getting Started
 
