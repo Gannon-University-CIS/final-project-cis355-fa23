@@ -43,6 +43,12 @@ public class MappingProfile : Profile
         CreateMap<CreateRoomRequest, Chatroom>();
         CreateMap<Chatroom, CreateRoomResponse>();
         CreateMap<Chatroom, RoomResponse>();
+        CreateMap<Chatroom, ChatGetResponse>()
+                .ConstructUsing((room) =>
+                    new ChatGetResponse
+                    {
+                        Id = room.Id
+                    });
         // Add more mappings as needed
     }
 }

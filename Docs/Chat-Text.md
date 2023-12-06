@@ -6,6 +6,8 @@
 - [x] Setup Chatroom DB
 - [x] Setup ChatHistory DB
 - [x] Setup Room Creator
+- [x] Get Room List
+- [x] Room Authentication
 
 ### Setup of Databases
 For the chatroom setup I had used the **Ef Migration** to autosetup the Databases based on the written functions on the _UserDbContext.cs_ file located in `Backend/src/UserApi/Entities/` File.
@@ -19,3 +21,7 @@ When the post has been activated then a request, if all is good to go then it br
 
 ### Setup of Room List
 By using the **Get** http request we are able to obtain all of the chatrooms created. In comparison with the **Get** from _users_ this one doe snot have any `Role` requierments to view the list of all available chatrooms.
+
+### Room Authentication
+In order to enter rooms which you've been invited there are many ways but because if time I chose to make the user type the **id** and the **password**.
+if room exist and the password was set right then it `throws back the id`. Later on the Id will be used to get chat messages and send chat messages to a specific chatroom

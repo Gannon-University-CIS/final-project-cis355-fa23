@@ -95,5 +95,11 @@ public class UserRepository : IUserRepository
         return _context.Users.FirstOrDefaultAsync(u => u.Username == username);
     }
 
+
+    public Task<Chatroom?> GetRoomByRoomIdAsync(string id)
+    {
+        return _context.Chatrooms.FirstOrDefaultAsync(u => u.Id.ToString() == id);
+    }
+
     // ... Add other methods here as needed
 }

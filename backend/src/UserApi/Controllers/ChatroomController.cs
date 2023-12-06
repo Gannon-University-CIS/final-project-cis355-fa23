@@ -16,8 +16,9 @@ public class ChatroomController : ControllerBase
         _userService = userService;
     }
 
+    [AllowAnonymous]
     [HttpPost("room")]
-    public async Task<IActionResult> Create(CreateRoomRequest newRoom)
+    public async Task<IActionResult> CreateRoom(CreateRoomRequest newRoom)
     {
         var createdRoom = await _userService.CreateRoomAsync(newRoom);
 
@@ -30,5 +31,16 @@ public class ChatroomController : ControllerBase
         var rooms = await _userService.GetAllChatroomsAsync();
 
         return Ok(rooms);
+    }
+
+    [HttpPost("chat")]
+    public async Task<IActionResult> ChatPost(ChatGetRequest model)
+    {
+        var response = await _userService.AuthenticateRoom(model);
+
+        if (response == null)
+            return BadRequest(new { message = "Room Id or password is incorrect" });
+
+        return Ok(response);
     }
 }
