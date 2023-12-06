@@ -11,6 +11,8 @@ public partial class Chatroom
 
     public byte[] PasswordHash { get; set; } = null!;
 
+    public byte[] PasswordSalt { get; set; } = null!;
+
     public int? Capacity { get; set; }
     public int? TotalUsers { get; set; }
 

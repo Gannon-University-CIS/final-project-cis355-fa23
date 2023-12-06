@@ -38,6 +38,10 @@ public class MappingProfile : Profile
                         Token = context.Items["Token"].ToString() ?? string.Empty
                     });
         CreateMap<User, UserResponse>();
+
+        // Chatrooms Mapping
+        CreateMap<CreateRoomRequest, Chatroom>();
+        CreateMap<Chatroom, CreateRoomResponse>();
         // Add more mappings as needed
     }
 }

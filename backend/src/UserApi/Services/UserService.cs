@@ -37,7 +37,7 @@ public class UserService : IUserService
         // authentication successful so generate jwt token
         var token = _jwtUtils.GenerateJwtToken(user);
 
-        
+
         // map user and token to response model with Automapper and return
         return _mapper.Map<AuthenticateResponse>(user, opts => opts.Items["Token"] = token);
     }
@@ -62,10 +62,30 @@ public class UserService : IUserService
         return _mapper.Map<CreateUserResponse>(createdUser);
     }
 
+    public async Task<CreateRoomResponse?> CreateRoomAsync(CreateRoomRequest roomRequest)
+    {
+        // Hash and salt the password
+        (byte[] passwordHash, byte[] passwordSalt) = _passwordHasher.HashPassword(roomRequest.Password);
+
+        // Map CreateRoomRequest model to Room entity with Automapper
+        var roomEntity = _mapper.Map<Chatroom>(roomRequest);
+
+        // Assign hashed and salted password to user entity
+        roomEntity.PasswordHash = passwordHash;
+        roomEntity.PasswordSalt = passwordSalt;
+
+        // Create room in database
+        var createdRoom = await _userRepository.CreateRoomAsync(roomEntity)
+            ?? throw new Exception("An error occurred when creating the room. Try again later.");
+
+        // Map Room entity to CreateRoomResponse model with Automapper
+        return _mapper.Map<CreateRoomResponse>(createdRoom);
+    }
+
     public async Task<IEnumerable<UserResponse>> GetAllAsync()
     {
         var users = await _userRepository.GetAllUsersAsync();
-    
+
         return _mapper.Map<IEnumerable<UserResponse>>(users);
     }
 

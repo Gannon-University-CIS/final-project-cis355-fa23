@@ -56,7 +56,31 @@ public class UserRepository : IUserRepository
         catch (DbUpdateException ex)
         {
             _logger.LogError(ex, "An error occurred while saving the entity changes.");
-            throw new UserCreationFailedException("An unexpected error occurred while creating the user.", ex);
+            throw new UserCreationFailedException("An unexpected error occurred while creating the room.", ex);
+        }
+    }
+
+    public async Task<Chatroom?> CreateRoomAsync(Chatroom room)
+    {
+        try
+        {
+            // Add room to database
+            var createdRoom = (await _context.Chatrooms.AddAsync(room)).Entity;
+            // Save changes to database
+            await _context.SaveChangesAsync();
+
+            if (createdRoom == null)
+            {
+                _logger.LogError("An error occurred while creating the room. Room data: {Room}", room);
+                return null;
+            }
+
+            return createdRoom;
+        }
+        catch (DbUpdateException ex)
+        {
+            _logger.LogError(ex, "An error occurred while saving the entity changes.");
+            throw new RoomCreationFailedException("An unexpected error occurred while creating the room.", ex);
         }
     }
 

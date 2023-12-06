@@ -63,7 +63,6 @@ public partial class UserDbContext : DbContext
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.Title).HasMaxLength(255);
-            entity.Property(e => e.PasswordHash).HasMaxLength(255);
             entity.Property(e => e.Capacity).HasDefaultValueSql("0");
             entity.Property(e => e.TotalUsers).HasDefaultValueSql("0");
         });
