@@ -18,4 +18,5 @@ public class AuthenticateRequest
     /// </summary>
     [Required]
     public string Password { get; set; } = null!;
+
 }

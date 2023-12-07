@@ -38,10 +38,16 @@ public class JwtUtils : IJwtUtils
             claims.Add(new Claim("Id", user.Id.ToString()));
         }
 
+
+        // if login with username and password assign 2fa role
+        // .. write logic here
+        
+        // if 2fa token is valid 
         if (user != null && user.Role != null)
         {
             claims.Add(new Claim("Role", user.Role));
         }
+  
         
         var tokenDescriptor = new SecurityTokenDescriptor
         {

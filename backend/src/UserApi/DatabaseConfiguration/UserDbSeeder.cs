@@ -49,7 +49,8 @@ namespace UserApi.DatabaseConfiguration
                             PasswordSalt = passwordSalt,
                             Role = "Admin",
                             IsActive = true,
-                            DateCreated = DateTime.Now
+                            DateCreated = DateTime.Now,
+                            twoFAsecret = "111"
                         });
                         await context.SaveChangesAsync();
                     }
