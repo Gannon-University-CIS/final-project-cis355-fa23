@@ -57,7 +57,7 @@ public class ChatroomController : ControllerBase
         return Ok(createdMessage);
     }
 
-    [HttpGet("chat")]
+    [HttpGet("chat/{roomId}/{password}")]
     public async Task<IActionResult> GetChats(string roomId, string password)
     {
         // Authenticate that room exists and password is right
