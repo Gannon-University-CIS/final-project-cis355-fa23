@@ -14,5 +14,10 @@ namespace UserApi.Models
         /// The title of the new room.
         /// </summary>
         public string Title { get; set; } = null!;
+
+        /// <summary>
+        /// The id of the user who created the room.
+        /// </summary>
+        public string UserId { get; set; } = null!;
     }
 }

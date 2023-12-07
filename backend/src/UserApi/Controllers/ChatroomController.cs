@@ -21,7 +21,14 @@ public class ChatroomController : ControllerBase
     [HttpPost("room")]
     public async Task<IActionResult> CreateRoom(CreateRoomRequest newRoom)
     {
-        var createdRoom = await _userService.CreateRoomAsync(newRoom);
+        var user = (User?)HttpContext.Items["User"];
+
+        if (user == null)
+        {
+            return BadRequest(new { message = "User is not logged in" });
+        }
+
+        var createdRoom = await _userService.CreateRoomAsync(newRoom, user.Id);
 
         return Ok(createdRoom);
     }

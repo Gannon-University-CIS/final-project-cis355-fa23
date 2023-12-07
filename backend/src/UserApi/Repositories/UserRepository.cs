@@ -78,12 +78,15 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<Chatroom?> CreateRoomAsync(Chatroom room)
+    public async Task<Chatroom?> CreateRoomAsync(Chatroom room, Guid userId)
     {
         try
         {
             // Add room to database
             var createdRoom = (await _context.Chatrooms.AddAsync(room)).Entity;
+
+            createdRoom.UserId = userId.ToString();
+
             // Save changes to database
             await _context.SaveChangesAsync();
 

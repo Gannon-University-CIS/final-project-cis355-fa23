@@ -8,6 +8,7 @@ public partial class Chatroom
     public Guid Id { get; set; }
 
     public string Title { get; set; } = null!;
+    public string? UserId { get; set; } = null!;
 
     public byte[] PasswordHash { get; set; } = null!;
 

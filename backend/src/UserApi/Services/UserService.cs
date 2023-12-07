@@ -80,7 +80,7 @@ public class UserService : IUserService
         return _mapper.Map<CreateUserResponse>(createdUser);
     }
 
-    public async Task<CreateRoomResponse?> CreateRoomAsync(CreateRoomRequest roomRequest)
+    public async Task<CreateRoomResponse?> CreateRoomAsync(CreateRoomRequest roomRequest, Guid userId)
     {
         // Hash and salt the password
         (byte[] passwordHash, byte[] passwordSalt) = _passwordHasher.HashPassword(roomRequest.Password);
@@ -93,7 +93,7 @@ public class UserService : IUserService
         roomEntity.PasswordSalt = passwordSalt;
 
         // Create room in database
-        var createdRoom = await _userRepository.CreateRoomAsync(roomEntity)
+        var createdRoom = await _userRepository.CreateRoomAsync(roomEntity, userId)
             ?? throw new Exception("An error occurred when creating the room. Try again later.");
 
         // Map Room entity to CreateRoomResponse model with Automapper

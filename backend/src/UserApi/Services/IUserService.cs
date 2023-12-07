@@ -12,6 +12,6 @@ public interface IUserService
     Task<IEnumerable<ChatResponse>> GetChatsAsync(string id);
     Task<UserResponse?> GetByIdAsync(string id);
     Task<CreateUserResponse?> CreateUserAsync(CreateUserRequest user);
-    Task<CreateRoomResponse?> CreateRoomAsync(CreateRoomRequest room);
+    Task<CreateRoomResponse?> CreateRoomAsync(CreateRoomRequest room, Guid userId);
     Task<CreateChatResponse?> CreateMessageAsync(ChatGetRequest room, Guid userId, Guid roomId);
 }

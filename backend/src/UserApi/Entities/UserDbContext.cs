@@ -56,6 +56,8 @@ public partial class UserDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("Chatrooms_pkey");
 
+            entity.Property(e => e.UserId).HasMaxLength(36);
+
             entity.HasIndex(e => e.Title, "Chatrooms_Title_key").IsUnique();
 
             entity.Property(e => e.Id).HasDefaultValueSql("uuid_generate_v4()");
