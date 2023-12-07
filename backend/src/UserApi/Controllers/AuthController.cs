@@ -33,9 +33,9 @@ public class AuthController : ControllerBase
     // add model for twofarequest.cs (token)
     // add model for twofaresponse.cs (jwt token)    
     [HttpPost("2fa")]
-    public async Task<IActionResult> twofaLogin(twoFArequeste model)
+    public async Task<IActionResult> twoFAlogin(twoFArequest model)
     {
-        var response = await _userService.Authenticate(model);
+        var response = await _userService.twoFA(model);
 
         if (response == null)
             return BadRequest(new { message = "Username or password is incorrect" });

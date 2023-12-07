@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 /// <summary>
 /// Represents a request to authenticate a user.
 /// </summary>
-public class twoFArequeste
+public class twoFArequest
 {
     /// <summary>
     /// The 2FA of the user to authenticate.
