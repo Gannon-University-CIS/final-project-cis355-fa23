@@ -38,7 +38,7 @@ public class ChatroomController : ControllerBase
     public async Task<IActionResult> ChatPost(ChatGetRequest model)
     {
         // Authenticate that room exists and password is right
-        var response = await _userService.AuthenticateRoom(model);
+        var response = await _userService.AuthenticateRoom(model.Password, model.RoomId);
 
         if (response == null)
             return BadRequest(new { message = "Room Id or password is incorrect" });
@@ -62,12 +62,7 @@ public class ChatroomController : ControllerBase
     {
         // Authenticate that room exists and password is right
 
-        ChatFilterRequest model = new ChatFilterRequest
-        {
-            RoomId = roomId,
-            Password = password
-        };
-        var response = await _userService.AuthenticateChat(model);
+        var response = await _userService.AuthenticateRoom(password, roomId);
 
         if (response == null)
             return BadRequest(new { message = "Room Id or password is incorrect" });

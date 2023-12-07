@@ -6,8 +6,7 @@ namespace UserApi.Services;
 public interface IUserService
 {
     Task<AuthenticateResponse?> Authenticate(AuthenticateRequest model);
-    Task<ChatGetResponse?> AuthenticateRoom(ChatGetRequest model);
-    Task<ChatGetResponse?> AuthenticateChat(ChatFilterRequest model);
+    Task<ChatGetResponse?> AuthenticateRoom(string password, string roomId);
     Task<IEnumerable<UserResponse>> GetAllAsync();
     Task<IEnumerable<RoomResponse>> GetAllChatroomsAsync();
     Task<IEnumerable<ChatResponse>> GetChatsAsync(string id);
