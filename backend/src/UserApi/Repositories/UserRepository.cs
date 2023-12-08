@@ -20,6 +20,12 @@ public class UserRepository : IUserRepository
         return await _context.Users.ToListAsync();
     }
 
+
+    public async Task<IEnumerable<Chatroom>> GetAllRoomsAsync()
+    {
+        return await _context.Chatrooms.ToListAsync();
+    }
+
     public async Task<User?> GetUserByIdAsync(string id)
     {
         // convert string to Guid
@@ -29,6 +35,18 @@ public class UserRepository : IUserRepository
             return null;
         }
         return await _context.Users.FindAsync(guidId);
+    }
+
+    public async Task<IEnumerable<ChatHistory>> GetChatsAsync(string id)
+    {
+        var list = await _context.ChatHistory.ToListAsync();
+        List<ChatHistory> filteredList = new List<ChatHistory>();
+        foreach (var item in list)
+        {
+            if (item.RoomId != null && item.RoomId.Equals(id.ToString()))
+                filteredList.Add(item);
+        }
+        return filteredList;
     }
 
     public async Task<User?> CreateUserAsync(User user)
@@ -56,13 +74,70 @@ public class UserRepository : IUserRepository
         catch (DbUpdateException ex)
         {
             _logger.LogError(ex, "An error occurred while saving the entity changes.");
-            throw new UserCreationFailedException("An unexpected error occurred while creating the user.", ex);
+            throw new UserCreationFailedException("An unexpected error occurred while creating the room.", ex);
+        }
+    }
+
+    public async Task<Chatroom?> CreateRoomAsync(Chatroom room, Guid userId)
+    {
+        try
+        {
+            // Add room to database
+            var createdRoom = (await _context.Chatrooms.AddAsync(room)).Entity;
+
+            createdRoom.UserId = userId.ToString();
+
+            // Save changes to database
+            await _context.SaveChangesAsync();
+
+            if (createdRoom == null)
+            {
+                _logger.LogError("An error occurred while creating the room. Room data: {Room}", room);
+                return null;
+            }
+
+            return createdRoom;
+        }
+        catch (DbUpdateException ex)
+        {
+            _logger.LogError(ex, "An error occurred while saving the entity changes.");
+            throw new RoomCreationFailedException("An unexpected error occurred while creating the room.", ex);
+        }
+    }
+
+    public async Task<ChatHistory?> CreateChatAsync(ChatHistory message)
+    {
+        try
+        {
+            // Add room to database
+            var createdMessage = (await _context.ChatHistory.AddAsync(message)).Entity;
+            // Save changes to database
+            await _context.SaveChangesAsync();
+
+            if (createdMessage == null)
+            {
+                _logger.LogError("An error occurred while creating the message. Message data: {Message}", message);
+                return null;
+            }
+
+            return createdMessage;
+        }
+        catch (DbUpdateException ex)
+        {
+            _logger.LogError(ex, "An error occurred while saving the entity changes.");
+            throw new RoomCreationFailedException("An unexpected error occurred while creating the message.", ex);
         }
     }
 
     public Task<User?> GetUserByUsernameAsync(string username)
     {
         return _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+    }
+
+
+    public Task<Chatroom?> GetRoomByRoomIdAsync(string id)
+    {
+        return _context.Chatrooms.FirstOrDefaultAsync(u => u.Id.ToString() == id);
     }
 
     // ... Add other methods here as needed

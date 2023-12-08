@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3ecda2e5-0033-41a2-b808-e617c914600f",
+		"_postman_id": "3726a4b8-41dc-40fc-8d7d-38c398c7c49b",
 		"name": "User API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "12453193"
+		"_exporter_id": "30377564"
 	},
 	"item": [
 		{
@@ -155,6 +155,125 @@
 							],
 							"path": [
 								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chatroom",
+			"item": [
+				{
+					"name": "chat",
+					"item": [
+						{
+							"name": "chat",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"roomId\": \"30f531d1-43f7-4feb-b7d3-dd88a3eac965\",\n  \"password\": \"password\",\n  \"message\": \"hello world\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/chatroom/chat",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"chatroom",
+										"chat"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "chat",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"roomId\": \"id\",\r\n  \"password\": \"password\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/chatroom/chat",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"chatroom",
+										"chat"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "room",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"title\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/chatroom/room",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"chatroom",
+								"room"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "room",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/chatroom/room",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"chatroom",
+								"room"
 							]
 						}
 					},

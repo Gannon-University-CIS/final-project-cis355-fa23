@@ -12,4 +12,15 @@ namespace UserApi.Exceptions
         {
         }
     }
+
+        public class RoomCreationFailedException : Exception
+    {
+        public RoomCreationFailedException(string message) : base(message)
+        {
+        }
+
+        public RoomCreationFailedException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
 }

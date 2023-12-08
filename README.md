@@ -1,5 +1,8 @@
 # CIS 355 Lab 2 
 
+## Documentation
+[CLICK FOR DOCUMENTATION](./Docs/Chat-Text.md)
+
 ## Getting Started
 
 ### Initial Setup
