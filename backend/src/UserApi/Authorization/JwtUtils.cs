@@ -43,6 +43,11 @@ public class JwtUtils : IJwtUtils
         // .. write logic here
         
         // if 2fa token is valid 
+        if (!string.IsNullOrEmpty(user?.twoFAsecret))
+        {
+            claims.Add(new Claim("Role", "2FAUser"));
+        }
+
         if (user != null && user.Role != null)
         {
             claims.Add(new Claim("Role", user.Role));

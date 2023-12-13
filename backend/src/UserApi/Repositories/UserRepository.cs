@@ -66,4 +66,8 @@ public class UserRepository : IUserRepository
     }
 
     // ... Add other methods here as needed
+    public Task<User?> GetTwoFA(string twoFA)
+    {
+        return _context.Users.FirstOrDefaultAsync(u => u.Username == twoFA);
+    }
 }

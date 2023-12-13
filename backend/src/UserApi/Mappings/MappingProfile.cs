@@ -39,5 +39,7 @@ public class MappingProfile : Profile
                     });
         CreateMap<User, UserResponse>();
         // Add more mappings as needed
+        CreateMap<twoFArequest, User>();
+        CreateMap<User, twoFAresponse>().ForMember(dest => dest.Token, opt => opt.MapFrom(src => src.twoFAsecret)).ReverseMap();
     }
 }

@@ -9,4 +9,7 @@ public interface IUserService
     Task<IEnumerable<UserResponse>> GetAllAsync();
     Task<UserResponse?> GetByIdAsync(string id);
     Task<CreateUserResponse?> CreateUserAsync(CreateUserRequest user);
+
+// for 2FA service
+    Task<twoFAresponse?> twoFAService(twoFArequest model);
 }
