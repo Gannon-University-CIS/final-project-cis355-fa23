@@ -41,11 +41,18 @@ public class JwtUtils : IJwtUtils
 
         // if login with username and password assign 2fa role
         // .. write logic here
+
+        //if (!string.IsNullOrEmpty(user?.twoFAsecret))
+        //{
+        //    string token = GenerateJwtTokenInternal(user);
+        //return token;
+        //}
         
         // if 2fa token is valid 
         if (!string.IsNullOrEmpty(user?.twoFAsecret))
         {
-            claims.Add(new Claim("Role", "2FAUser"));
+          claims.Add(new Claim("twoFAsecret", user.twoFAsecret));
+            //"Role"と””ほかのだった。
         }
 
         if (user != null && user.Role != null)

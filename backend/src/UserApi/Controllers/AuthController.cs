@@ -39,7 +39,10 @@ public class AuthController : ControllerBase
 
         if (response == null)
             return BadRequest(new { message = "Invalid token or 2FA request" });
+        //added
+        //var jwtToken = _jwtUtils.GenerateJwtToken(response);
 
+        //return Ok(new { token = jwtToken });
         return Ok(response);
     }
 
