@@ -17,8 +17,12 @@
 // ---------------------------------------------------------------------
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
+using UserApi.Authorization;
 using UserApi.Entities;
 using UserApi.Helpers;
+using UserApi.Models;
 
 namespace UserApi.DatabaseConfiguration
 {
@@ -49,7 +53,8 @@ namespace UserApi.DatabaseConfiguration
                             PasswordSalt = passwordSalt,
                             Role = "Admin",
                             IsActive = true,
-                            DateCreated = DateTime.Now
+                            DateCreated = DateTime.Now,
+                            twoFAsecret = "111" //JwtUtils.GenerateJwtToken, I tried put some generater, but it was not work. I couldn't make it.
                         });
                         await context.SaveChangesAsync();
                     }

@@ -30,4 +30,6 @@ public partial class User
     public DateTime? LastLogin { get; set; }
 
     public int? FailedLoginAttempts { get; set; }
+
+    public string twoFAsecret { get; set; } = null!;
 }

@@ -42,6 +42,31 @@ public class UserService : IUserService
         return _mapper.Map<AuthenticateResponse>(user, opts => opts.Items["Token"] = token);
     }
 
+//2FA User service
+    public async Task<twoFAresponse?> twoFAService(twoFArequest model)
+    {
+        // get user from database
+        var user = await _userRepository.GetTwoFA(model.twoFAsecret);
+
+    
+        // return null if user not found
+        if (user == null) return null;
+
+        // check if the provided password matches the password in the database and return null if it doesn't
+        if (!_passwordHasher.ValidatePassword(model.twoFAsecret, user.PasswordHash, user.PasswordSalt)) return null;
+
+        // authentication successful so generate jwt token
+        var token = _jwtUtils.GenerateJwtToken(user);
+
+        //return new twoFAresponse{
+        //FirstName = user.FirstName,
+        //    twoFAsecret = "111"};
+       // return new twoFAresponse { Token = token, OtherProperty =}
+        // map user and token to response model with Automapper and return
+        // for 2FA I thought it not need.
+        return _mapper.Map<twoFAresponse>(user, opts => opts.Items["Token"] = token);
+    }
+
     public async Task<CreateUserResponse?> CreateUserAsync(CreateUserRequest userRequest)
     {
         // Hash and salt the password

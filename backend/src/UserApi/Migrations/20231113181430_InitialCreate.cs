@@ -30,7 +30,7 @@ namespace UserApi.Migrations
                     DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP"),
                     DateModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP"),
                     LastLogin = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    FailedLoginAttempts = table.Column<int>(type: "integer", nullable: true, defaultValueSql: "0")
+                    FailedLoginAttempts = table.Column<int>(type: "integer", nullable: true, defaultValueSql: "0"),
                 },
                 constraints: table =>
                 {
